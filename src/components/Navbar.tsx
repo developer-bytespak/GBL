@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 const navLinks = [
@@ -9,13 +9,43 @@ const navLinks = [
   { label: "Benefits", href: "#benefits" },
   { label: "Tuition", href: "#pricing" },
   { label: "Founders", href: "#founders" },
+  { label: "Leadership", href: "#leadership" },
 ];
+
+// IDs of sections with light/white backgrounds
+const lightSections = ["problem", "benefits", "founders"];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOverLight, setIsOverLight] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const navBottom = 64; // navbar height
+      for (const id of lightSections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < navBottom && rect.bottom > 0) {
+            setIsOverLight(true);
+            return;
+          }
+        }
+      }
+      setIsOverLight(false);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-300 ${
+        isOverLight ? "bg-deep-black/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 h-16 flex items-center justify-between">
         <a href="#hero">
           <Image
