@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-gold: #C9A24A;
+  --color-gold-light: #D4B366;
+  --color-gold-dark: #A8832E;
+  --color-deep-black: #0F0F10;
+  --color-charcoal: #1C1C1C;
+  --color-light-bg: #F5F5F5;
+  --color-white: #FFFFFF;
+  --color-gray-text: #6B6B6B;
+  --color-dark-text: #2A2A2A;
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0F0F10;
+  color: #2A2A2A;
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), Georgia, serif;
+}
+
+/* Certificate modal backdrop */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
+}
