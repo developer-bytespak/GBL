@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 interface LeadershipProps {
@@ -27,6 +28,13 @@ const instructors = [
   },
 ];
 
+// Each instructor slides in from a different direction
+const slideDirections = [
+  { x: -80, y: 0 },   // left
+  { x: 0, y: 80 },    // bottom
+  { x: 80, y: 0 },    // right
+];
+
 export default function Leadership({ onViewCertificate }: LeadershipProps) {
   return (
     <AnimatedSection
@@ -37,19 +45,46 @@ export default function Leadership({ onViewCertificate }: LeadershipProps) {
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8">
         <div className="text-center mb-16">
-          <p className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-4">
+          <motion.p
+            className="text-gold font-body text-sm tracking-[0.2em] uppercase mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             Academy Leadership
-          </p>
-          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl text-white mb-6">
+          </motion.p>
+          <motion.h2
+            className="font-heading text-3xl sm:text-4xl md:text-5xl text-white mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
             Led by Certified Expertise
-          </h2>
-          <div className="w-16 h-0.5 bg-gold mx-auto" />
+          </motion.h2>
+          <motion.div
+            className="w-16 h-0.5 bg-gold mx-auto"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          />
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {instructors.map((instructor, index) => (
-            <div
+            <motion.div
               key={index}
+              initial={{
+                opacity: 0,
+                x: slideDirections[index].x,
+                y: slideDirections[index].y,
+              }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: index * 0.2 }}
+              whileHover={{ y: -8, boxShadow: "0 0 30px rgba(201,162,74,0.12)" }}
               className="bg-charcoal rounded-xl border border-gold/20 overflow-hidden"
             >
               {/* Styled certificate preview */}
@@ -82,7 +117,7 @@ export default function Leadership({ onViewCertificate }: LeadershipProps) {
                 <p className="font-body text-white/60 text-sm mb-5">
                   Certified Instructor
                 </p>
-                <button
+                {/* <button
                   onClick={() =>
                     onViewCertificate(
                       instructor.cert,
@@ -92,9 +127,9 @@ export default function Leadership({ onViewCertificate }: LeadershipProps) {
                   className="w-full bg-gold hover:bg-gold-dark text-deep-black font-body font-semibold text-sm py-3 rounded transition-colors cursor-pointer"
                 >
                   View Certificate
-                </button>
+                </button> */}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
