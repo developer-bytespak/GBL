@@ -32,3 +32,50 @@ h1, h2, h3, h4, h5, h6 {
 .modal-backdrop {
   backdrop-filter: blur(8px);
 }
+
+/* Gold glow effect for buttons */
+@keyframes gold-pulse {
+  0%, 100% { box-shadow: 0 0 15px rgba(201, 162, 74, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(201, 162, 74, 0.5); }
+}
+.gold-glow-pulse {
+  animation: gold-pulse 3s ease-in-out infinite;
+}
+
+/* Gold underline grow */
+@keyframes underline-grow {
+  from { width: 0; }
+  to { width: 4rem; }
+}
+
+/* Floating animation for pricing card */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Gradient shift for Final CTA background */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Gold border glow on hover */
+.hover-gold-glow:hover {
+  box-shadow: 0 0 20px rgba(201, 162, 74, 0.15), 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-color: rgba(201, 162, 74, 0.3);
+}
+
+/* Section divider animation */
+.section-divider {
+  background: linear-gradient(90deg, transparent, #C9A24A, transparent);
+  height: 1px;
+}

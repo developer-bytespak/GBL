@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 const benefits = [
@@ -61,22 +64,31 @@ export default function Benefits() {
         </div>
 
         <div className="grid sm:grid-cols-2 gap-8">
-          {benefits.map((benefit, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-lg p-8 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:-translate-y-1"
-            >
-              <div className="w-14 h-14 bg-gold/10 rounded-lg flex items-center justify-center mb-5">
-                {benefit.icon}
-              </div>
-              <h3 className="font-heading text-xl text-charcoal mb-3">
-                {benefit.title}
-              </h3>
-              <p className="font-body text-gray-text text-sm leading-relaxed">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
+          {benefits.map((benefit, index) => {
+            // Wave pattern: top-left(0), top-right(1), bottom-left(2), bottom-right(3)
+            const delays = [0, 0.15, 0.3, 0.45];
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: delays[index] }}
+                whileHover={{ y: -8, boxShadow: "0 0 25px rgba(201,162,74,0.12), 0 15px 40px rgba(0,0,0,0.08)" }}
+                className="bg-white rounded-lg p-8 shadow-sm border border-gray-100 transition-colors hover-gold-glow"
+              >
+                <div className="w-14 h-14 bg-gold/10 rounded-lg flex items-center justify-center mb-5">
+                  {benefit.icon}
+                </div>
+                <h3 className="font-heading text-xl text-charcoal mb-3">
+                  {benefit.title}
+                </h3>
+                <p className="font-body text-gray-text text-sm leading-relaxed">
+                  {benefit.description}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </AnimatedSection>

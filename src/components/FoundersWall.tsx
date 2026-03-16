@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import Image from "next/image";
 
@@ -51,9 +52,15 @@ export default function FoundersWall({ onViewCertificate }: FoundersWallProps) {
         {/* Founders grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {founders.map((founder, index) => (
-            <div
+            <motion.div
               key={index}
-              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:-translate-y-1"
+              initial={{ opacity: 0, scale: 0.9, rotateY: 15 }}
+              whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: index * 0.15 }}
+              whileHover={{ y: -10, scale: 1.03, boxShadow: "0 0 25px rgba(201,162,74,0.15), 0 20px 40px rgba(0,0,0,0.1)" }}
+              className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 hover-gold-glow"
+              style={{ perspective: 1000 }}
             >
               {/* Certificate thumbnail preview */}
               <div className="p-3 border-b border-gray-100 bg-gray-50">
@@ -89,12 +96,12 @@ export default function FoundersWall({ onViewCertificate }: FoundersWallProps) {
                   View Certificate
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* The First Cohort — after cards */}
-        <div className="max-w-3xl mx-auto text-center mt-20">
+        {/* <div className="max-w-3xl mx-auto text-center mt-20">
           <h3 className="font-heading text-2xl sm:text-3xl text-charcoal mb-6">
             The First Cohort
           </h3>
@@ -107,7 +114,7 @@ export default function FoundersWall({ onViewCertificate }: FoundersWallProps) {
           <p className="font-body text-gray-text text-base sm:text-lg leading-relaxed">
             Their participation marks the beginning of what is designed to become a recognized professional certification for petroleum deal intermediaries worldwide.
           </p>
-        </div>
+        </div> */}
 
         {/* Founders CTA */}
         <div className="max-w-3xl mx-auto text-center mt-20 pt-16 border-t border-gray-200">
